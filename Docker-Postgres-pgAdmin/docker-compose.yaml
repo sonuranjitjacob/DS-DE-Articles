@@ -1,0 +1,26 @@
+services:
+  pg-database:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=name_gender
+    volumes:
+      - "./name_gender_data:/var/lib/postgresql/data:rw"
+    ports:
+      - "5432:5432"
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - "8080:80"
+  pythoncontainer:
+    build: .
+    command: " --user=root --password=root --host=pg-database --port=5432 --db=name_gender --table_name=name_gender_table --url='https://archive.ics.uci.edu/ml/machine-learning-databases/00591/name_gender_dataset.csv' "
+
+
+
+
+

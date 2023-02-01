@@ -21,10 +21,10 @@ def main(params):
     logging.info('Downloading the file')
     os.system(f"wget {url} -O {csv_file} --no-check-certificate")
     logging.info('INFO: Finished file download')
-    engine = create_engine(f"postgresql://{user}:{password}@{host}:{port}/{db}")
+    engine = create_engine(f"postgresql://{user}:{password}@{host}:{port}/{db}") #creating an engine to 
 
     logging.info("INFO: Reading the csv")
-    df_iter = pd.read_csv('name_gender_dataset.csv', iterator=True,chunksize=100000, engine='python')
+    df_iter = pd.read_csv('output.csv', iterator=True,chunksize=100000, engine='python')
     df = next(df_iter)
 
     logging.info('INFO: Inserting into table...........')
